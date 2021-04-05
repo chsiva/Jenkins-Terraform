@@ -105,5 +105,7 @@ pipeline {
                 set +x
                 rm -rf $WORKSPACE/*
                 '''
+            }
+        }
     }
 }
