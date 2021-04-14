@@ -19,7 +19,6 @@ pipeline {
         stage('TerraRising') {
             steps {
 
-
                  sh '''#!/bin/bash -l
                  
                  # Setting up Terraform in build environment
