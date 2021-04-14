@@ -16,6 +16,17 @@ pipeline {
     }
 
     stages {
+        stage('Builder') {
+            steps {
+                withCredentials([file(credentialsId: 'Project', variable: 'Project')]) {
+               sh"""
+               rm -rf *
+               echo \${Project} > service-account.json
+               ls -al
+               """
+                }
+            }
+        }
         stage('TerraRising') {
             steps {
 
