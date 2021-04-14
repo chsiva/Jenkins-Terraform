@@ -88,6 +88,7 @@ pipeline {
                 expression { !params.destroy }
             }
             steps {
+                withCredentials([file(credentialsId: 'Project', variable: 'Project')]) {
                 sh '''#!/bin/bash -l
 
                   echo "Terraform Apply"
@@ -96,6 +97,7 @@ pipeline {
 
                   '''
             }
+        }
         }
         stage('Clean Workspace'){
             steps {
