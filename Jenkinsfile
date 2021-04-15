@@ -21,14 +21,8 @@ pipeline {
         stage('Builder') {
             steps {
                 withCredentials([file(credentialsId: 'PROJECT', variable: 'gcp')]) {
-                    script {
-                   sh '''
-                    gcloud auth activate-service-account --key-file=${gcp}"
-                    gsutil ls
-                    echo "${gcp}" >> gcp-key.json
-                    cat gcp-key.json
-                    '''
-                    }
+                 sh("gcloud auth activate-service-account --key-file=${gcp}")
+                  sh("gsutil ls")
                 }
                 }
             }
