@@ -26,7 +26,6 @@ pipeline {
                     sh("export GOOGLE_APPLICATION_CREDENTIALS=${gcp}")
                 }
                 }
-            }
         stage('TerraRising') {
             steps {
 
