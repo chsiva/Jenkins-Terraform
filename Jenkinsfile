@@ -32,7 +32,6 @@ pipeline {
                 }
                 }
             }
-        }
         stage('TerraRising') {
             steps {
 
