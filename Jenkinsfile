@@ -103,6 +103,7 @@ pipeline {
                sh '''#!/bin/bash -l
 
                   echo "Terraform Apply"
+                  echo $GOOGLE_APPLICATION_CREDENTIALS
                   set +x
                   ./terraform apply current.tfplan
 
