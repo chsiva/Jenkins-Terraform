@@ -10,7 +10,6 @@ terraform {
   backend "gcs" {
     bucket = "sidivayv"
     prefix = "terraform/state"
-    credentials = "/opt/gcp/service-account.json"
  }
    }
 resource "google_storage_bucket" "my_bucket" {
