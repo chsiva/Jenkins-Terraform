@@ -4,7 +4,6 @@ pipeline {
   environment {
       tf_version = '0.14.9'
       config_path = '/var/lib/jenkins/workspace/testpipeline'
-      withCredentials([file(credentialsId: 'Project', variable: 'gcp')])
     }
 
     parameters {
@@ -20,12 +19,14 @@ pipeline {
     
     stages {
         stage('Builder') {
-                steps {
+            steps {
+                withCredentials([file(credentialsId: 'Project', variable: 'gcp')]) {
                  sh("gcloud auth activate-service-account --key-file=${gcp}")
                   sh("gsutil ls")
                     sh("export GOOGLE_APPLICATION_CREDENTIALS=${gcp}")
                 }
                 }
+        }
         stage('TerraRising') {
             steps {
 
@@ -98,16 +99,18 @@ pipeline {
                 expression { !params.destroy }
             }
             steps {
-                
+              withCredentials([file(credentialsId: 'Project', variable: 'gcp')]) {
                sh '''#!/bin/bash -l
 
                   echo "Terraform Apply"
+                  export GOOGLE_APPLICATION_CREDENTIALS=${gcp} 
                   echo $GOOGLE_APPLICATION_CREDENTIALS
                   set +x
                   ./terraform apply current.tfplan
 
                   '''
                     }
+        }
         }
         stage('Clean Workspace'){
             steps {
