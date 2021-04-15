@@ -4,6 +4,7 @@ pipeline {
   environment {
       tf_version = '0.14.9'
       config_path = '/var/lib/jenkins/workspace/testpipeline'
+      withCredentials([file(credentialsId: 'Project', variable: 'gcp')])
     }
 
     parameters {
@@ -19,8 +20,7 @@ pipeline {
     
     stages {
         stage('Builder') {
-            steps {
-                withCredentials([file(credentialsId: 'Project', variable: 'gcp')]) {
+                steps {
                  sh("gcloud auth activate-service-account --key-file=${gcp}")
                   sh("gsutil ls")
                     sh("export GOOGLE_APPLICATION_CREDENTIALS=${gcp}")
