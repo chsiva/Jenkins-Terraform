@@ -15,15 +15,17 @@ pipeline {
         disableConcurrentBuilds()
     }
 
+    
+    
     stages {
         stage('Builder') {
             steps {
-                withCredentials([file(credentialsId: 'Project', variable: 'Project')]) {
-               sh"""
-               rm -rf *
-               echo \${Project} > service-account.json
-               ls -al
-               """
+                withCredentials([file(credentialsId: 'Project', variable: 'gcp')]) {
+                   sh '''
+                    gcloud auth activate-service-account --key-file=${gcp}"
+                    gsutil ls
+                    '''
+                }
                 }
             }
         }
