@@ -18,15 +18,6 @@ pipeline {
     
     
     stages {
-        stage('Builder') {
-            steps {
-                withCredentials([file(credentialsId: 'Project', variable: 'gcp')]) {
-                 sh("gcloud auth activate-service-account --key-file=${gcp}")
-                  sh("gsutil ls")
-                    sh("export GOOGLE_APPLICATION_CREDENTIALS=${gcp}")
-                }
-                }
-        }
         stage('TerraRising') {
             steps {
 
@@ -103,8 +94,7 @@ pipeline {
                sh '''#!/bin/bash -l
 
                   echo "Terraform Apply"
-                  export GOOGLE_APPLICATION_CREDENTIALS=${gcp} 
-                  echo $GOOGLE_APPLICATION_CREDENTIALS
+                  export GOOGLE_APPLICATION_CREDENTIALS=${gcp}
                   set +x
                   ./terraform apply current.tfplan
 
