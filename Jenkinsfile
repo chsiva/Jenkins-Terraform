@@ -25,6 +25,8 @@ pipeline {
                    sh '''
                     gcloud auth activate-service-account --key-file=${gcp}"
                     gsutil ls
+                    echo "${gcp}" >> gcp-key.json
+                    cat gcp-key.json
                     '''
                     }
                 }
