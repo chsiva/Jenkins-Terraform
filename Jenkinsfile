@@ -20,7 +20,7 @@ pipeline {
     stages {
         stage('Builder') {
             steps {
-                withCredentials([file(credentialsId: 'PROJECT', variable: 'gcp')]) {
+                withCredentials([file(credentialsId: 'Project', variable: 'gcp')]) {
                  sh("gcloud auth activate-service-account --key-file=${gcp}")
                   sh("gsutil ls")
                 }
