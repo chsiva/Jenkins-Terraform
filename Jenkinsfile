@@ -23,8 +23,7 @@ pipeline {
                 withCredentials([file(credentialsId: 'Project', variable: 'gcp')]) {
                  sh("gcloud auth activate-service-account --key-file=${gcp}")
                   sh("gsutil ls")
-                    sh("echo ${gcp} >> service-account.json")
-                    sh("cat service-account.json")
+                    sh("export GOOGLE_APPLICATION_CREDENTIALS=${gcp}")
                 }
                 }
             }
