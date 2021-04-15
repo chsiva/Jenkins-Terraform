@@ -1,6 +1,6 @@
 provider "google" {
-  credentials = "${file("/var/lib/jenkins/workspace/testpipeline/service-account.json")}"
-  project = "testingpjct-dev"
+#  credentials = "${file("/var/lib/jenkins/workspace/testpipeline/service-account.json")}"
+#  project = "testingpjct-dev"
   region = "us-central1"
   zone = "us-central1-c"
 }
