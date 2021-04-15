@@ -63,16 +63,18 @@ pipeline {
                 expression { params.destroy }
             }
             steps {
+                withCredentials([file(credentialsId: 'Project', variable: 'gcp')]) {
                 echo "Terraform Destroy"
 
                 sh '''#!/bin/bash -l
 
                   echo "Terraform Destroy"
+                  export GOOGLE_APPLICATION_CREDENTIALS=${gcp}
                   set -x
                   ./terraform destroy -auto-approve
 
                   '''
-
+                }
             }
         }
 
